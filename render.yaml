@@ -3,7 +3,8 @@ services:
     name: portfolio
     plan: free
     branch: main
-    buildCommand: npm install && npm run build
+    installCommand: npm install
+    buildCommand: npm run build
     publishPath: build
     envVars:
       - key: NODE_ENV
