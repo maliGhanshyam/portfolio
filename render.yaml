@@ -3,10 +3,11 @@ services:
     name: portfolio
     plan: free
     branch: main
-    installCommand: npm install
-    buildCommand: npm run build
+    buildCommand: npm install && npm run build
     publishPath: build
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=2048
     healthCheckPath: /
