@@ -1,0 +1,12 @@
+services:
+  - type: static
+    name: portfolio
+    env: static
+    plan: free
+    branch: main
+    buildCommand: npm install && npm run build
+    publishPath: build
+    envVars:
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
