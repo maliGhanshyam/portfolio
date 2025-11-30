@@ -1,7 +1,6 @@
 services:
   - type: static
     name: portfolio
-    env: static
     plan: free
     branch: main
     buildCommand: npm install && npm run build
