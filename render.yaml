@@ -1,13 +1,13 @@
 services:
-  - type: static
+  - type: web
     name: portfolio
+    runtime: static
     plan: free
-    branch: main
+    branch: animation
     buildCommand: npm install && npm run build
-    publishPath: dist
+    staticPublishPath: ./dist
     envVars:
       - key: NODE_ENV
         value: production
       - key: NODE_OPTIONS
         value: --max-old-space-size=2048
-    healthCheckPath: /
