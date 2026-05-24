@@ -93,7 +93,19 @@
   border-radius: 10px;
   position: relative;
   box-shadow: 0 0 15px currentColor;
-  transition: box-shadow 0.3s ease;
+}
+
+.skill-progress::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: progress-shine 2s ease-in-out infinite;
+}
+
+@keyframes progress-shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
 }
 
 .skill-level {

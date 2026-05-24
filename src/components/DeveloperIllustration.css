@@ -1,0 +1,131 @@
+.dev-illustration {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid rgba(99, 102, 241, 0.12);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.35) 0%, #0a0f1a 100%);
+}
+
+.dev-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: min(320px, 50vh);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.dev-scene-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.dev-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  will-change: transform;
+}
+
+/* Monitor highlights — CSS pulse only, never fully transparent */
+.dev-glow {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 8px;
+  opacity: 0.55;
+  animation: monitor-pulse 4s ease-in-out infinite;
+}
+
+.dev-glow--left {
+  top: 18%;
+  left: 5%;
+  width: 24%;
+  height: 26%;
+  background: radial-gradient(ellipse, rgba(99, 102, 241, 0.35) 0%, transparent 72%);
+  animation-delay: 0s;
+}
+
+.dev-glow--center {
+  top: 16%;
+  left: 30%;
+  width: 30%;
+  height: 28%;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.4) 0%, transparent 72%);
+  animation-delay: 0.6s;
+}
+
+.dev-glow--right {
+  top: 18%;
+  right: 5%;
+  width: 22%;
+  height: 24%;
+  background: radial-gradient(ellipse, rgba(56, 189, 248, 0.28) 0%, transparent 72%);
+  animation-delay: 1.2s;
+}
+
+@keyframes monitor-pulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.02);
+  }
+}
+
+/* Subtle edge depth — always visible */
+.dev-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 0 48px rgba(15, 23, 42, 0.35);
+  opacity: 1;
+}
+
+/* Narrow light band — does not cover full frame */
+.dev-shine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 28%;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.14;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .dev-scene {
+    max-height: min(240px, 42vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev-glow {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .dev-shine {
+    display: none;
+  }
+}

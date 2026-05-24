@@ -7,23 +7,28 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ScrollProgress from './components/ScrollProgress';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 import './App.css';
 
 function App() {
+  useSmoothScroll();
+
   return (
     <div className="App">
+      <ScrollProgress />
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );
 }
 
 export default App;
-
-

@@ -25,6 +25,8 @@ import {
   SiSpring,
   SiDocker,
 } from "react-icons/si";
+import AnimatedSectionHeader from "./AnimatedSectionHeader";
+import { staggerContainer, fadeInUp, scaleIn, viewport } from "../utils/animations";
 import "./Skills.css";
 
 const Skills = () => {
@@ -35,12 +37,7 @@ const Skills = () => {
         { name: "React.js", icon: FaReact, level: 90, color: "#61DAFB" },
         { name: "Next.js", icon: SiNextdotjs, level: 90, color: "#000000" },
         { name: "Redux", icon: SiRedux, level: 85, color: "#764ABC" },
-        {
-          name: "Material UI",
-          icon: SiMaterialdesign,
-          level: 85,
-          color: "#007FFF",
-        },
+        { name: "Material UI", icon: SiMaterialdesign, level: 85, color: "#007FFF" },
         { name: "JavaScript", icon: FaJs, level: 90, color: "#F7DF1E" },
         { name: "TypeScript", icon: SiTypescript, level: 85, color: "#3178C6" },
         { name: "HTML", icon: FaHtml5, level: 95, color: "#E34F26" },
@@ -85,71 +82,54 @@ const Skills = () => {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
   return (
     <section id="skills" className="skills">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-tag">Skills</span>
-          <h2 className="section-title">Technologies I Work With</h2>
-          <p className="section-description">
-            A comprehensive toolkit for building modern, scalable web
-            applications.
-          </p>
-        </motion.div>
+        <AnimatedSectionHeader
+          tag="Skills"
+          title="Technologies I Work With"
+          description="A comprehensive toolkit for building modern, scalable web applications."
+        />
 
         <motion.div
           className="skills-grid"
-          variants={containerVariants}
+          variants={staggerContainer(0.12)}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={viewport}
         >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
               className="skill-category"
-              variants={skillVariants}
+              variants={scaleIn}
+              whileHover={{ y: -8, boxShadow: "0 20px 50px rgba(99,102,241,0.25)" }}
             >
-              <h3 className="category-title">{category.title}</h3>
+              <motion.h3
+                className="category-title"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: categoryIndex * 0.1 }}
+              >
+                {category.title}
+              </motion.h3>
               <div className="skills-list">
                 {category.skills.map((skill, skillIndex) => (
                   <motion.div
                     key={skillIndex}
                     className="skill-item"
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ duration: 0.2 }}
+                    variants={fadeInUp}
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    transition={{ type: "spring", stiffness: 400 }}
                   >
-                    <div className="skill-icon" style={{ color: skill.color }}>
+                    <motion.div
+                      className="skill-icon"
+                      style={{ color: skill.color }}
+                    >
                       <skill.icon />
-                    </div>
-                    <div className="skill-info">
+                    </motion.div>
+                    <motion.div className="skill-info">
                       <span className="skill-name">{skill.name}</span>
                       <div className="skill-bar">
                         <motion.div
@@ -158,11 +138,23 @@ const Skills = () => {
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
-                          transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                          transition={{
+                            duration: 1.2,
+                            delay: skillIndex * 0.08,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                         />
                       </div>
-                      <span className="skill-level">{skill.level}%</span>
-                    </div>
+                      <motion.span
+                        className="skill-level"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 + skillIndex * 0.08 }}
+                      >
+                        {skill.level}%
+                      </motion.span>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
