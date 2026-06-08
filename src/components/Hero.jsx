@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight } from 'react-icons/fa';
 import { HiCode } from 'react-icons/hi';
 import ParticleBackground from './ParticleBackground';
 import DeveloperIllustration from './DeveloperIllustration';
-import { staggerContainer, fadeInUp } from '../utils/animations';
+import ScrollIndicator from './ScrollIndicator';
+import GradientBorder from './GradientBorder';
 import './Hero.css';
 
 const CODE_LINES = [
@@ -23,9 +24,67 @@ const CODE_LINES = [
   <> {'}'};</>,
 ];
 
+const easePro = [0.22, 1, 0.36, 1];
+
+const heroStagger = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+  },
+};
+
+const heroFadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.75, ease: easePro },
+  },
+};
+
+const codeLineReveal = {
+  hidden: { opacity: 0, x: -8 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.45, ease: easePro },
+  },
+};
+
 const codeStagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const HeroTitle = ({ name }) => {
+  const words = name.split(/\s+/);
+
+  return (
+    <h1 className="hero-title" aria-label={name}>
+      {words.map((word, i) => (
+        <span key={`${word}-${i}`} className="hero-title-word-wrap">
+          <motion.span
+            className="hero-title-word gradient-text"
+            initial={{ y: '108%', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.35 + i * 0.14,
+              ease: easePro,
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+      <motion.span
+        className="hero-title-accent"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 0.9, delay: 0.75, ease: easePro }}
+      />
+    </h1>
+  );
 };
 
 const HeroVisual = ({ parallax }) => {
@@ -34,22 +93,25 @@ const HeroVisual = ({ parallax }) => {
 
   useEffect(() => {
     if (visibleLines >= CODE_LINES.length) return;
-    const timer = setTimeout(() => setVisibleLines((v) => v + 1), 480);
+    const timer = setTimeout(() => setVisibleLines((v) => v + 1), 620);
     return () => clearTimeout(timer);
   }, [visibleLines]);
 
   useEffect(() => {
-    const blink = setInterval(() => setShowCursor((c) => !c), 530);
+    const blink = setInterval(() => setShowCursor((c) => !c), 600);
     return () => clearInterval(blink);
   }, []);
 
   return (
-    <motion.div
-      className="hero-visual-card"
-      initial={{ opacity: 0.92, y: 20, scale: 0.99 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 0.45, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ boxShadow: '0 24px 70px rgba(99,102,241,0.25)' }}
+    <GradientBorder
+      className="hero-visual-gradient"
+      innerClassName="hero-visual-card"
+      borderRadius={16}
+      animateOn="mount"
+      delay={0.55}
+      spinDuration={10}
+      spinOpacity={0.7}
+      whileHover={{ scale: 1.01 }}
     >
       <div className="code-header">
         <span className="code-dot red" />
@@ -64,11 +126,7 @@ const HeroVisual = ({ parallax }) => {
         animate="visible"
       >
         {CODE_LINES.slice(0, visibleLines).map((line, li) => (
-          <motion.div
-            key={li}
-            className="code-line"
-            variants={fadeInUp}
-          >
+          <motion.div key={li} className="code-line" variants={codeLineReveal}>
             {line}
           </motion.div>
         ))}
@@ -77,139 +135,174 @@ const HeroVisual = ({ parallax }) => {
         )}
       </motion.div>
       <DeveloperIllustration parallax={parallax} />
-    </motion.div>
+    </GradientBorder>
   );
 };
 
 const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const name = 'Ghanshyam Mali';
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 40, damping: 28 });
+  const smoothY = useSpring(mouseY, { stiffness: 40, damping: 28 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 24,
-        y: (e.clientY / window.innerHeight - 0.5) * 24,
-      });
+      const x = (e.clientX / window.innerWidth - 0.5) * 18;
+      const y = (e.clientY / window.innerHeight - 0.5) * 18;
+      mouseX.set(x);
+      mouseY.set(y);
+      setMousePosition({ x, y });
     };
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   const socialLinks = [
-    { icon: FaGithub, url: 'https://github.com' },
-    { icon: FaLinkedin, url: 'https://linkedin.com/in/ghanshyammali' },
-    { icon: FaEnvelope, url: 'mailto:ghanshyams.mali@gmail.com' },
+    { icon: FaGithub, url: 'https://github.com', label: 'GitHub' },
+    { icon: FaLinkedin, url: 'https://linkedin.com/in/ghanshyammali', label: 'LinkedIn' },
+    { icon: FaEnvelope, url: 'mailto:ghanshyams.mali@gmail.com', label: 'Email' },
   ];
 
   return (
     <section id="home" className="hero">
       <div className="hero-background">
-        <ParticleBackground count={35} />
+        <ParticleBackground count={22} />
         <div className="hero-grid" />
         <motion.div
           className="hero-gradient hero-gradient-1"
-          animate={{
-            x: mousePosition.x,
-            y: mousePosition.y,
-          }}
-          transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+          style={{ x: smoothX, y: smoothY }}
         />
         <motion.div
           className="hero-gradient hero-gradient-2"
-          animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.08, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ opacity: [0.35, 0.5, 0.35] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
       </div>
 
       <motion.div
         className="hero-container"
-        variants={staggerContainer(0.12, 0.1)}
+        variants={heroStagger}
         initial="hidden"
         animate="visible"
       >
-        <motion.div className="hero-content" variants={fadeInUp}>
-          <motion.div
-            className="hero-badge"
-            variants={fadeInUp}
-            whileHover={{ scale: 1.04, borderColor: 'rgba(129,140,248,0.6)' }}
-          >
-            <motion.span
-              animate={{ rotate: [0, 8, -8, 0] }}
-              transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 4 }}
+        <motion.div className="hero-content">
+          <motion.div variants={heroFadeUp}>
+            <GradientBorder
+              className="hero-badge-gradient"
+              innerClassName="hero-badge"
+              borderRadius={50}
+              animateOn="mount"
+              delay={0.1}
+              spinDuration={6}
+              spinOpacity={0.55}
             >
               <HiCode className="badge-icon" aria-hidden="true" />
-            </motion.span>
-            <span>Full Stack Developer</span>
-            <span className="badge-dot" />
+              <span>Full Stack Developer</span>
+              <motion.span
+                className="badge-dot"
+                animate={{ opacity: [1, 0.6, 1] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </GradientBorder>
           </motion.div>
 
-          <motion.h1 className="hero-title" variants={fadeInUp}>
-            <motion.span
-              className="gradient-text"
-              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-            >
-              {name}
-            </motion.span>
-          </motion.h1>
-
-          <motion.p className="hero-subtitle" variants={fadeInUp}>
-            Full Stack Developer with 1.5 years of experience, skilled in React,
-            Next.js, Node.js, SQL/NoSQL databases, REST APIs, AWS deployment,
-            and CI/CD pipelines. Passionate about building scalable solutions
-            and delivering high-performance applications.
-          </motion.p>
-
-          <motion.div className="hero-buttons" variants={fadeInUp}>
-            <motion.a
-              href="#projects"
-              className="btn btn-primary"
-              whileHover={{ scale: 1.05, y: -3, boxShadow: '0 12px 32px rgba(99,102,241,0.5)' }}
-              whileTap={{ scale: 0.97 }}
-            >
-              View My Work
-            </motion.a>
-            <motion.a
-              href="#contact"
-              className="btn btn-secondary"
-              whileHover={{ scale: 1.05, y: -3, borderColor: '#a5b4fc' }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <FaDownload aria-hidden="true" /> Download Resume
-            </motion.a>
+          <motion.div variants={heroFadeUp}>
+            <HeroTitle name={name} />
           </motion.div>
 
-          <motion.div className="hero-social" variants={fadeInUp}>
+          <motion.div variants={heroFadeUp}>
+            <GradientBorder
+              className="hero-panel-gradient"
+              innerClassName="hero-panel"
+              borderRadius={18}
+              animateOn="mount"
+              delay={0.45}
+              spinDuration={12}
+              spinOpacity={0.45}
+            >
+              <p className="hero-subtitle">
+                Full Stack Developer with 1.5 years of experience, skilled in React,
+                Next.js, Node.js, SQL/NoSQL databases, REST APIs, AWS deployment,
+                and CI/CD pipelines. Passionate about building scalable solutions
+                and delivering high-performance applications.
+              </p>
+
+              <div className="hero-buttons">
+                <motion.a
+                  href="#projects"
+                  className="btn btn-primary"
+                  whileHover={{ y: -2, boxShadow: '0 10px 28px rgba(99,102,241,0.45)' }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.25, ease: easePro }}
+                >
+                  View My Work
+                  <FaArrowRight className="btn-icon" aria-hidden="true" />
+                </motion.a>
+                <GradientBorder
+                  className="hero-btn-gradient"
+                  innerClassName="hero-btn-inner"
+                  borderRadius={50}
+                  animateOn="mount"
+                  delay={0.6}
+                  spinDuration={5}
+                  spinOpacity={0.75}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <motion.a
+                    href="#contact"
+                    className="btn btn-secondary btn-in-gradient"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.25, ease: easePro }}
+                  >
+                    <FaDownload aria-hidden="true" /> Download Resume
+                  </motion.a>
+                </GradientBorder>
+              </div>
+            </GradientBorder>
+          </motion.div>
+
+          <motion.div className="hero-social" variants={heroFadeUp}>
             {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-                aria-label={social.url}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 + index * 0.1, type: 'spring', stiffness: 300 }}
-                whileHover={{ scale: 1.12, y: -4 }}
-                whileTap={{ scale: 0.95 }}
+              <GradientBorder
+                key={social.label}
+                className="hero-social-gradient"
+                innerClassName="hero-social-inner"
+                borderRadius={50}
+                animateOn="mount"
+                delay={1 + index * 0.1}
+                spinDuration={7}
+                spinOpacity={0.5}
+                whileHover={{ scale: 1.06, y: -3 }}
               >
-                <social.icon />
-              </motion.a>
+                <motion.a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  aria-label={social.label}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <social.icon />
+                </motion.a>
+              </GradientBorder>
             ))}
           </motion.div>
         </motion.div>
 
         <motion.div
           className="hero-image"
-          initial={{ opacity: 0.9, x: 24 }}
+          initial={{ opacity: 0, x: 36 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: 0.45, duration: 0.95, ease: easePro }}
         >
           <HeroVisual parallax={mousePosition} />
         </motion.div>
       </motion.div>
+
+      <ScrollIndicator target="#about" />
     </section>
   );
 };

@@ -17,8 +17,8 @@ const DeveloperIllustration = ({ parallax = { x: 0, y: 0 } }) => {
       >
         <motion.div
           className="dev-scene-inner"
-          animate={reduceMotion ? {} : { y: [0, -5, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={reduceMotion ? {} : { y: [0, -3, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         >
           {/* Ambient monitor highlights — opacity never drops below 0.45 */}
           <span className="dev-glow dev-glow--left" aria-hidden="true" />
@@ -42,10 +42,10 @@ const DeveloperIllustration = ({ parallax = { x: 0, y: 0 } }) => {
               aria-hidden="true"
               animate={{ x: ['-80%', '140%'] }}
               transition={{
-                duration: 4.5,
+                duration: 5,
                 repeat: Infinity,
                 ease: 'easeInOut',
-                repeatDelay: 4,
+                repeatDelay: 6,
               }}
             />
           )}

@@ -20,17 +20,21 @@
   font-size: 1.2rem;
   color: var(--primary-color);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .contact-item:hover .contact-arrow {
   opacity: 1;
+  transform: translateX(0);
 }
 
 .contact-content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2.5rem;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -97,6 +101,34 @@
   font-size: 1rem;
   color: var(--text-primary);
   font-weight: 600;
+}
+
+.contact-cta {
+  width: 100%;
+  text-align: center;
+}
+
+.contact-cta h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'Playfair Display', serif;
+  background: var(--gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact-cta p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.contact-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 

@@ -11,11 +11,18 @@ const ScrollProgress = () => {
   });
 
   return (
-    <motion.div
-      className="scroll-progress"
-      style={{ scaleX }}
-      aria-hidden="true"
-    />
+    <>
+      <motion.div
+        className="scroll-progress"
+        style={{ scaleX }}
+        aria-hidden="true"
+      />
+      <motion.div
+        className="scroll-progress-glow"
+        style={{ scaleX }}
+        aria-hidden="true"
+      />
+    </>
   );
 };
 

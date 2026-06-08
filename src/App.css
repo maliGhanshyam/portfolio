@@ -78,6 +78,21 @@ section {
   padding: 0 var(--container-px);
 }
 
+.section-title-line {
+  width: min(120px, 30vw);
+  height: 3px;
+  background: var(--gradient-1);
+  border-radius: 2px;
+  margin: 0 auto clamp(0.75rem, 2vw, 1.25rem);
+  transform-origin: center;
+}
+
+.reveal-letter,
+.reveal-word {
+  display: inline-block;
+  transform-origin: bottom center;
+}
+
 .decorative-circle {
   position: absolute;
   border-radius: 50%;

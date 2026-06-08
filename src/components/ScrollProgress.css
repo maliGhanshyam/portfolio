@@ -9,3 +9,17 @@
   z-index: 10001;
   pointer-events: none;
 }
+
+.scroll-progress-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  transform-origin: 0%;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0.35;
+  filter: blur(4px);
+}

@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBriefcase, FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
-import { staggerContainer, fadeInUp, viewport } from '../utils/animations';
+import FloatingOrbs from './FloatingOrbs';
+import { staggerContainer, fadeInUp, fadeInLeft, fadeInRight, viewport } from '../utils/animations';
 import './Experience.css';
 
 const Experience = () => {
@@ -59,6 +60,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="experience">
+      <FloatingOrbs />
       <div className="container">
         <AnimatedSectionHeader
           tag="Experience & Education"
@@ -85,7 +87,7 @@ const Experience = () => {
               <motion.div
                 key={index}
                 className={`timeline-item ${exp.type}`}
-                variants={fadeInUp}
+                variants={index % 2 === 0 ? fadeInLeft : fadeInRight}
               >
                 <motion.div
                   className="timeline-marker"

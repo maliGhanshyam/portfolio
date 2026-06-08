@@ -1,0 +1,24 @@
+.gradient-border {
+  position: relative;
+  padding: 2px;
+  overflow: hidden;
+}
+
+.gradient-border-spin {
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    from 0deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #ec4899,
+    #667eea
+  );
+  pointer-events: none;
+}
+
+.gradient-border-inner {
+  position: relative;
+  z-index: 1;
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
+import FloatingOrbs from './FloatingOrbs';
 import { staggerContainer, fadeInUp, viewport } from '../utils/animations';
 import './Projects.css';
 
@@ -52,6 +53,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="projects">
+      <FloatingOrbs />
       <motion.div className="container">
         <AnimatedSectionHeader
           tag="Portfolio"

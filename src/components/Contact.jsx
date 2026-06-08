@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
+import GradientCard from './GradientCard';
+import Magnetic from './Magnetic';
+import FloatingOrbs from './FloatingOrbs';
 import { staggerContainer, fadeInUp, viewport } from '../utils/animations';
 import './Contact.css';
 
@@ -29,7 +32,13 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact">
-      <div className="contact-glow" aria-hidden="true" />
+      <FloatingOrbs />
+      <motion.div
+        className="contact-glow"
+        aria-hidden="true"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
 
       <div className="container">
         <AnimatedSectionHeader
@@ -66,9 +75,40 @@ const Contact = () => {
                   <span className="contact-title">{info.title}</span>
                   <span className="contact-value">{info.value}</span>
                 </div>
+                <span className="contact-arrow">
+                  <FaArrowRight />
+                </span>
               </motion.a>
             ))}
           </motion.div>
+
+          <GradientCard className="contact-cta">
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Ready to build something great?
+            </motion.h3>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              I&apos;m open to freelance projects, full-time roles, and collaborations.
+            </motion.p>
+            <Magnetic strength={0.35}>
+              <motion.a
+                href="mailto:ghanshyams.mali@gmail.com"
+                className="btn btn-primary contact-cta-btn"
+                whileHover={{ scale: 1.05, boxShadow: '0 12px 32px rgba(99,102,241,0.5)' }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Send a Message <FaArrowRight />
+              </motion.a>
+            </Magnetic>
+          </GradientCard>
         </motion.div>
       </div>
     </section>

@@ -112,9 +112,23 @@
   color: var(--text-primary);
 }
 
+.nav-mobile-backdrop {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .nav-toggle {
     display: block;
+  }
+
+  .nav-mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    top: 70px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 999;
   }
 
   .nav-menu {
@@ -126,10 +140,11 @@
     backdrop-filter: blur(20px);
     width: 100%;
     text-align: center;
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     padding: 2rem 0;
     gap: 0;
+    z-index: 1000;
   }
 
   .nav-menu.active {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope, FaHeart } from 'react-icons/fa';
+import { staggerContainer, blurReveal } from '../utils/animations';
 import './Footer.css';
 
 const Footer = () => {
@@ -30,14 +31,14 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-content">
-          <motion.div
-            className="footer-section"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+        <motion.div
+          className="footer-content"
+          variants={staggerContainer(0.12)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+        >
+          <motion.div className="footer-section" variants={blurReveal}>
             <h3 className="footer-logo">Ghanshyam Mali</h3>
             <p className="footer-description">
               Full Stack Developer passionate about creating amazing web
@@ -61,13 +62,7 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          <motion.div
-            className="footer-section"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+          <motion.div className="footer-section" variants={blurReveal}>
             <h4 className="footer-title">Quick Links</h4>
             <ul className="footer-links">
               {quickLinks.map((link, index) => (
@@ -87,13 +82,7 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          <motion.div
-            className="footer-section"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <motion.div className="footer-section" variants={blurReveal}>
             <h4 className="footer-title">Contact Info</h4>
             <div className="footer-contact">
               <p>
@@ -102,18 +91,25 @@ const Footer = () => {
               <p>Mumbai, India</p>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         <motion.div
           className="footer-bottom"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          variants={blurReveal}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p>
             © {currentYear} Ghanshyam Mali. Made with{' '}
-            <FaHeart className="heart-icon" /> using React
+            <motion.span
+              className="heart-icon-wrap"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 2 }}
+            >
+              <FaHeart className="heart-icon" />
+            </motion.span>{' '}
+            using React
           </p>
         </motion.div>
       </div>

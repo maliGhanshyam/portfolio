@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaCode, FaRocket, FaLightbulb } from 'react-icons/fa';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
 import CountUp from './CountUp';
+import FloatingOrbs from './FloatingOrbs';
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, viewport } from '../utils/animations';
 import './About.css';
 
@@ -40,8 +41,19 @@ const listStagger = {
 
 const About = () => (
   <section id="about" className="about">
-    <div className="decorative-circle decorative-circle-1" aria-hidden="true" />
-    <div className="decorative-circle decorative-circle-2" aria-hidden="true" />
+    <FloatingOrbs />
+    <motion.div
+      className="decorative-circle decorative-circle-1"
+      aria-hidden="true"
+      animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+      transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+    />
+    <motion.div
+      className="decorative-circle decorative-circle-2"
+      aria-hidden="true"
+      animate={{ y: [0, 15, 0], x: [0, -8, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+    />
 
     <div className="container">
       <AnimatedSectionHeader

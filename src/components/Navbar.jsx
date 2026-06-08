@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { staggerContainer, blurReveal } from '../utils/animations';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -77,19 +78,14 @@ const Navbar = () => {
           </motion.span>
         </motion.a>
 
-        <ul className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}>
-          {navItems.map((item, index) => (
-            <motion.li
-              key={item.name}
-              className="nav-item"
-              initial={false}
-              animate={
-                isMobileMenuOpen
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 1, x: 0 }
-              }
-              transition={{ delay: isMobileMenuOpen ? index * 0.07 : 0, duration: 0.35 }}
-            >
+        <motion.ul
+          className={`nav-menu ${isMobileMenuOpen ? 'active' : ''}`}
+          variants={staggerContainer(0.06)}
+          initial="hidden"
+          animate="visible"
+        >
+          {navItems.map((item) => (
+            <motion.li key={item.name} className="nav-item" variants={blurReveal}>
               <a
                 href={item.href}
                 onClick={(e) => {
@@ -109,7 +105,19 @@ const Navbar = () => {
               </a>
             </motion.li>
           ))}
-        </ul>
+        </motion.ul>
+
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              className="nav-mobile-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+          )}
+        </AnimatePresence>
 
         <motion.div
           className="nav-toggle"

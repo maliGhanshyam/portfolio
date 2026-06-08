@@ -26,6 +26,7 @@ import {
   SiDocker,
 } from "react-icons/si";
 import AnimatedSectionHeader from "./AnimatedSectionHeader";
+import FloatingOrbs from "./FloatingOrbs";
 import { staggerContainer, fadeInUp, scaleIn, viewport } from "../utils/animations";
 import "./Skills.css";
 
@@ -84,6 +85,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills">
+      <FloatingOrbs />
       <div className="container">
         <AnimatedSectionHeader
           tag="Skills"
@@ -103,7 +105,12 @@ const Skills = () => {
               key={categoryIndex}
               className="skill-category"
               variants={scaleIn}
-              whileHover={{ y: -8, boxShadow: "0 20px 50px rgba(99,102,241,0.25)" }}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 20px 50px rgba(99,102,241,0.25)",
+                borderColor: "rgba(99,102,241,0.45)",
+              }}
+              layout
             >
               <motion.h3
                 className="category-title"
