@@ -5,8 +5,8 @@ export const easeInOut = [0.65, 0, 0.35, 1];
 
 export const viewport = {
   once: true,
-  margin: '-60px',
-  amount: 0.2,
+  margin: '0px',
+  amount: 0.05,
 };
 
 export const fadeInUp = {

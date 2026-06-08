@@ -26,8 +26,6 @@ import {
   SiDocker,
 } from "react-icons/si";
 import AnimatedSectionHeader from "./AnimatedSectionHeader";
-import FloatingOrbs from "./FloatingOrbs";
-import { staggerContainer, fadeInUp, scaleIn, viewport } from "../utils/animations";
 import "./Skills.css";
 
 const Skills = () => {
@@ -85,58 +83,24 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills">
-      <FloatingOrbs />
-      <div className="container">
+      <div className="container skills-container">
         <AnimatedSectionHeader
           tag="Skills"
           title="Technologies I Work With"
           description="A comprehensive toolkit for building modern, scalable web applications."
         />
 
-        <motion.div
-          className="skills-grid"
-          variants={staggerContainer(0.12)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-        >
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={categoryIndex}
-              className="skill-category"
-              variants={scaleIn}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 20px 50px rgba(99,102,241,0.25)",
-                borderColor: "rgba(99,102,241,0.45)",
-              }}
-              layout
-            >
-              <motion.h3
-                className="category-title"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: categoryIndex * 0.1 }}
-              >
-                {category.title}
-              </motion.h3>
+        <div className="skills-grid">
+          {skillCategories.map((category) => (
+            <article key={category.title} className="skill-category">
+              <h3 className="category-title">{category.title}</h3>
               <div className="skills-list">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skillIndex}
-                    className="skill-item"
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.02, y: -4 }}
-                    transition={{ type: "spring", stiffness: 400 }}
-                  >
-                    <motion.div
-                      className="skill-icon"
-                      style={{ color: skill.color }}
-                    >
-                      <skill.icon />
-                    </motion.div>
-                    <motion.div className="skill-info">
+                {category.skills.map((skill) => (
+                  <div key={skill.name} className="skill-item">
+                    <div className="skill-icon" style={{ color: skill.color }}>
+                      <skill.icon aria-hidden="true" />
+                    </div>
+                    <div className="skill-info">
                       <span className="skill-name">{skill.name}</span>
                       <div className="skill-bar">
                         <motion.div
@@ -144,30 +108,21 @@ const Skills = () => {
                           style={{ backgroundColor: skill.color }}
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
+                          viewport={{ once: true, amount: 0 }}
                           transition={{
-                            duration: 1.2,
-                            delay: skillIndex * 0.08,
+                            duration: 1,
                             ease: [0.22, 1, 0.36, 1],
                           }}
                         />
                       </div>
-                      <motion.span
-                        className="skill-level"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 + skillIndex * 0.08 }}
-                      >
-                        {skill.level}%
-                      </motion.span>
-                    </motion.div>
-                  </motion.div>
+                      <span className="skill-level">{skill.level}%</span>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </motion.div>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
