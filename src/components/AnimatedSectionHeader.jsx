@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { blurReveal, wordReveal, staggerContainer, viewport } from '../utils/animations';
+import { fadeInUp, staggerContainer, viewport } from '../utils/animations';
 
 const AnimatedSectionHeader = ({ tag, title, description }) => {
   const titleWords = title.split(/\s+/).filter(Boolean);
@@ -13,16 +13,17 @@ const AnimatedSectionHeader = ({ tag, title, description }) => {
       viewport={viewport}
       variants={staggerContainer(0.1)}
     >
-      <motion.span className="section-tag" variants={blurReveal}>
+      <motion.span className="section-tag" variants={fadeInUp}>
         {tag}
       </motion.span>
-      <h2 className="section-title" aria-label={title}>
+      <motion.h2 className="section-title" variants={fadeInUp} aria-label={title}>
         {titleWords.map((word, i) => (
-          <motion.span key={`${word}-${i}`} className="title-word" variants={wordReveal}>
+          <span key={`${word}-${i}`} className="title-word">
             {word}
-          </motion.span>
+            {i < titleWords.length - 1 ? ' ' : ''}
+          </span>
         ))}
-      </h2>
+      </motion.h2>
       <motion.div
         className="section-title-line"
         initial={{ scaleX: 0, opacity: 0 }}
@@ -31,7 +32,7 @@ const AnimatedSectionHeader = ({ tag, title, description }) => {
         transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       />
       {description && (
-        <motion.p className="section-description" variants={blurReveal}>
+        <motion.p className="section-description" variants={fadeInUp}>
           {description}
         </motion.p>
       )}

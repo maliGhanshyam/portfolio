@@ -6,7 +6,7 @@
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 }
 
@@ -124,6 +124,12 @@
 @media (max-width: 768px) {
   .skills {
     padding: 60px 0;
+    overflow-x: clip;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    line-height: 1.4;
   }
 
   .skill-category {

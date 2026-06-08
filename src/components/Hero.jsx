@@ -223,7 +223,7 @@ const Hero = () => {
               spinOpacity={0.45}
             >
               <p className="hero-subtitle">
-                Full Stack Developer with 1.5 years of experience, skilled in React,
+                Full Stack Developer with 3+ years of experience, skilled in React,
                 Next.js, Node.js, SQL/NoSQL databases, REST APIs, AWS deployment,
                 and CI/CD pipelines. Passionate about building scalable solutions
                 and delivering high-performance applications.

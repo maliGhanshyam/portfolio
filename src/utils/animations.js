@@ -76,9 +76,8 @@ export const wordReveal = {
 };
 
 export const staggerContainer = (stagger = 0.1, delay = 0) => ({
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: { staggerChildren: stagger, delayChildren: delay },
   },
 });
