@@ -95,12 +95,12 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'Pokedex Platform',
+      title: 'PokeDex Platform',
       highlights: [
-        'Built a full-stack Pokédex application with Next.js, TypeScript, and NestJS, implementing JWT authentication with refresh token rotation for secure user sessions across 500+ registered users.',
-        'Integrated a third-party Pokémon REST API using Node.js cron jobs for automated data synchronization and normalization, achieving 99.9% data consistency and eliminating manual updates for 1,000+ Pokémon records.',
-        'Developed a responsive, scalable UI with debounced search, reusable Material UI components, and modular architecture—improving search performance by ~30% and reducing redundant component code by ~40%.',
-        'Deployed a production-ready application on Render with an automated CI/CD pipeline, PostgreSQL persistence, environment-based configuration, and stable backend integration for reliable production performance.',
+        'Built full-stack Pokédex application with Next.js frontend and NestJS backend, implementing JWT authentication with refresh token rotation for secure user sessions across 500+ registered users.',
+        'Integrated third-party Pokémon API using Node.js cron jobs for automated data synchronization, achieving 99.9% data consistency and eliminating manual updates for 1,000+ Pokémon records.',
+        'Developed responsive UI with debounced search functionality and Material UI components, improving search performance by 30% and reducing redundant component code by 40%.',
+        'Deployed production-ready application on Render with automated CI/CD pipeline, PostgreSQL persistence, and environment-based configuration management.',
       ],
       image: POKEDEX_IMAGE,
       techStack: [
@@ -138,7 +138,7 @@ const Projects = () => {
           ],
         },
       ],
-      github: 'https://github.com',
+      github: 'https://github.com/maliGhanshyam',
       live: 'https://pokedex-nextjs.onrender.com/',
       featured: true,
     },
@@ -182,7 +182,7 @@ const Projects = () => {
                     <h3 className="project-title">{project.title}</h3>
                     <ProjectActions github={project.github} live={project.live} />
                   </div>
-                  <ul className="project-highlights">
+                  <ul className="site-list project-highlights">
                     {(project.highlights || [project.description]).filter(Boolean).map((point, i) => (
                       <li key={i}>{point}</li>
                     ))}

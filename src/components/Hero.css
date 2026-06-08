@@ -145,8 +145,13 @@
   backdrop-filter: blur(12px);
 }
 
-.hero-panel .hero-subtitle {
+.hero-panel .hero-summary {
   margin-bottom: 1.5rem;
+}
+
+.hero-summary li {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.65;
 }
 
 .hero-panel .hero-buttons {

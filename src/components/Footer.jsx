@@ -8,7 +8,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: FaGithub, url: 'https://github.com', label: 'GitHub' },
+    { icon: FaGithub, url: 'https://github.com/maliGhanshyam', label: 'GitHub' },
     { icon: FaLinkedin, url: 'https://linkedin.com/in/ghanshyammali', label: 'LinkedIn' },
     { icon: FaEnvelope, url: 'mailto:ghanshyams.mali@gmail.com', label: 'Email' },
   ];
@@ -41,8 +41,8 @@ const Footer = () => {
           <motion.div className="footer-section" variants={blurReveal}>
             <h3 className="footer-logo">Ghanshyam Mali</h3>
             <p className="footer-description">
-              Full Stack Developer passionate about creating amazing web
-              experiences and solving complex problems through code.
+              Full Stack Developer specializing in multi-tenant SaaS, NestJS, Next.js,
+              and MongoDB—building secure, high-performance web applications.
             </p>
             <div className="footer-social">
               {socialLinks.map((social, index) => (

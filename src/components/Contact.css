@@ -108,10 +108,18 @@
   text-align: center;
 }
 
+.contact-cta .gradient-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
 .contact-cta h3 {
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin: 0;
   font-family: 'Playfair Display', serif;
   background: var(--gradient-1);
   -webkit-background-clip: text;
@@ -119,16 +127,36 @@
   background-clip: text;
 }
 
-.contact-cta p {
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
+.contact-cta-list {
+  margin: 0;
+  width: 100%;
+  max-width: 26rem;
+  text-align: left;
+}
+
+.contact-cta-list li {
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .contact-cta-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.contact-cta-btn svg {
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.contact-cta-magnetic {
+  margin-top: 0.35rem;
 }
 
 
@@ -166,6 +194,11 @@
 
   .contact-value {
     font-size: 0.9rem;
+  }
+
+  .contact-cta-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
   }
 }
 

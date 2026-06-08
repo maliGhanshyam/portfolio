@@ -1,7 +1,7 @@
 {
   "name": "ghanshyam-mali-portfolio",
   "version": "1.0.0",
-  "description": "Professional portfolio website for Ghanshyam Mali - Full Stack Developer",
+  "description": "Professional portfolio of Ghanshyam Mali — Full Stack Developer (NestJS, Next.js, MongoDB, SaaS)",
   "private": true,
   "type": "module",
   "dependencies": {

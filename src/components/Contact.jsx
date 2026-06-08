@@ -90,22 +90,24 @@ const Contact = () => {
             >
               Ready to build something great?
             </motion.h3>
-            <motion.p
+            <motion.ul
+              className="site-list contact-cta-list"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              I&apos;m open to freelance projects, full-time roles, and collaborations.
-            </motion.p>
-            <Magnetic strength={0.35}>
+              <li>Open to freelance projects and full-time roles</li>
+              <li>Available for SaaS, enterprise, and full-stack collaborations</li>
+            </motion.ul>
+            <Magnetic strength={0.22} className="contact-cta-magnetic">
               <motion.a
                 href="mailto:ghanshyams.mali@gmail.com"
                 className="btn btn-primary contact-cta-btn"
-                whileHover={{ scale: 1.05, boxShadow: '0 12px 32px rgba(99,102,241,0.5)' }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(99,102,241,0.4)' }}
+                whileTap={{ scale: 0.98 }}
               >
-                Send a Message <FaArrowRight />
+                Send a Message <FaArrowRight aria-hidden="true" />
               </motion.a>
             </Magnetic>
           </GradientCard>

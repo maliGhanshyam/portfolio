@@ -19,7 +19,7 @@ const CODE_LINES = [
   </>,
   <>
     <span className="code-property">mode:</span>{' '}
-    <span className="code-string">'building cool products'</span>,
+    <span className="code-string">'Full Stack Developer'</span>,
   </>,
   <> {'}'};</>,
 ];
@@ -160,7 +160,7 @@ const Hero = () => {
   }, [mouseX, mouseY]);
 
   const socialLinks = [
-    { icon: FaGithub, url: 'https://github.com', label: 'GitHub' },
+    { icon: FaGithub, url: 'https://github.com/maliGhanshyam', label: 'GitHub' },
     { icon: FaLinkedin, url: 'https://linkedin.com/in/ghanshyammali', label: 'LinkedIn' },
     { icon: FaEnvelope, url: 'mailto:ghanshyams.mali@gmail.com', label: 'Email' },
   ];
@@ -199,7 +199,7 @@ const Hero = () => {
               spinOpacity={0.55}
             >
               <HiCode className="badge-icon" aria-hidden="true" />
-              <span>Full Stack Developer</span>
+              <span>Full Stack Developer · NestJS · Next.js · MongoDB</span>
               <motion.span
                 className="badge-dot"
                 animate={{ opacity: [1, 0.6, 1] }}
@@ -222,12 +222,12 @@ const Hero = () => {
               spinDuration={12}
               spinOpacity={0.45}
             >
-              <p className="hero-subtitle">
-                Full Stack Developer with 3+ years of experience, skilled in React,
-                Next.js, Node.js, SQL/NoSQL databases, REST APIs, AWS deployment,
-                and CI/CD pipelines. Passionate about building scalable solutions
-                and delivering high-performance applications.
-              </p>
+              <ul className="site-list hero-summary">
+                <li>Full-stack Developer with 3+ years of experience building scalable multi-tenant SaaS and enterprise applications</li>
+                <li>Proficient in React.js, Next.js, NestJS, Node.js, PostgreSQL, and MongoDB</li>
+                <li>Expertise in REST APIs, JWT authentication, RBAC, tenant isolation, and AWS (EC2/S3)</li>
+                <li>Docker, CI/CD pipelines, and automated testing for production-ready delivery</li>
+              </ul>
 
               <div className="hero-buttons">
                 <motion.a

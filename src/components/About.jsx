@@ -1,34 +1,57 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaRocket, FaLightbulb } from 'react-icons/fa';
+import { FaCloud, FaRocket, FaShieldAlt } from 'react-icons/fa';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
 import CountUp from './CountUp';
+import Magnetic from './Magnetic';
 import FloatingOrbs from './FloatingOrbs';
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, viewport } from '../utils/animations';
 import './About.css';
 
+const summaryBullets = [
+  'Full Stack Developer with 3+ years building scalable multi-tenant SaaS and enterprise web applications.',
+  'Proficient in React.js, Next.js, NestJS, Node.js, PostgreSQL, and MongoDB.',
+  'Expertise in REST APIs, JWT authentication, RBAC, tenant isolation, and AWS (EC2/S3) deployments.',
+  'Performance optimization through MongoDB indexing, API caching, and query optimization.',
+  'Docker, CI/CD pipelines, and automated testing for production-ready delivery.',
+  'Currently at e-InnoSec Consulting LLC — developing SaaS platforms supporting 10,000+ users.',
+  'Previously at NeoSOFT Technology — payment aggregation, Stripe integration, and reusable React libraries (20% less duplication, ~50% faster deployments).',
+];
+
 const features = [
   {
-    icon: FaCode,
-    title: 'Clean Code',
-    description: 'Writing maintainable and scalable code following best practices and design patterns.',
+    icon: FaCloud,
+    title: 'Multi-Tenant SaaS',
+    bullets: [
+      'NestJS + Next.js + MongoDB with tenant isolation and audit logging',
+      'RBAC across 100+ tenant environments',
+      'Platforms supporting 10,000+ users',
+    ],
   },
   {
     icon: FaRocket,
-    title: 'Fast Development',
-    description: 'Delivering high-quality solutions quickly with modern tools and frameworks.',
+    title: 'Performance & Optimization',
+    bullets: [
+      'MongoDB indexing, API caching, and query optimization',
+      'Lazy loading and memoization for faster UI',
+      '35–50% faster API responses and ~40% faster page loads',
+    ],
   },
   {
-    icon: FaLightbulb,
-    title: 'Innovative Solutions',
-    description: 'Creating unique and creative solutions to complex problems.',
+    icon: FaShieldAlt,
+    title: 'Security & DevOps',
+    bullets: [
+      'JWT authentication with refresh tokens and RBAC',
+      'Docker containerization and Jenkins CI/CD',
+      'AWS (EC2/S3) deployments with 95%+ API test coverage',
+    ],
   },
 ];
 
 const stats = [
-  { value: 1.5, suffix: '+', label: 'Years Experience', decimals: 1 },
-  { value: 30, suffix: '%', label: 'UI Efficiency Gain' },
-  { value: 35, suffix: '%', label: 'Performance Improvement' },
+  { value: 3, suffix: '+', label: 'Years Experience', decimals: 0 },
+  { value: 10, suffix: 'K+', label: 'Users Supported' },
+  { value: 95, suffix: '%+', label: 'API Test Coverage' },
 ];
 
 const listStagger = {
@@ -59,7 +82,7 @@ const About = () => (
       <AnimatedSectionHeader
         tag="About Me"
         title="Passionate Full Stack Developer"
-        description="I'm a dedicated developer with a passion for creating exceptional digital experiences. With expertise in both frontend and backend technologies, I bring ideas to life through clean code and innovative solutions."
+        description="I build scalable multi-tenant SaaS and enterprise web applications—from database schema design to production-ready dashboards."
       />
 
       <motion.div
@@ -77,20 +100,11 @@ const About = () => (
             viewport={viewport}
           >
             <motion.h3 variants={fadeInUp}>Who I Am</motion.h3>
-            <motion.p variants={fadeInUp}>
-              I'm Ghanshyam Mali, a Full Stack Developer with 1.5 years of experience,
-              skilled in React, Next.js, Node.js, SQL/NoSQL databases, REST APIs,
-              AWS deployment, and CI/CD pipelines. I have a strong focus on responsive
-              UI development, reusable component architecture, performance optimization,
-              and delivering scalable solutions across the full software development lifecycle.
-            </motion.p>
-            <motion.p variants={fadeInUp}>
-              Currently working as an Associate Software Developer at NeoSOFT Technology,
-              I specialize in building full-stack applications for payment aggregator and
-              pharma platforms. My expertise includes implementing RBAC, modular architecture,
-              and creating reusable component libraries that significantly reduce development
-              time and improve code quality.
-            </motion.p>
+            <motion.ul className="site-list about-summary" variants={fadeInUp}>
+              {summaryBullets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </motion.ul>
           </motion.div>
 
           <motion.div
@@ -119,29 +133,35 @@ const About = () => (
 
         <motion.div className="about-features" variants={fadeInRight}>
           <motion.div
+            className="about-features-list"
             variants={listStagger}
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
           >
             {features.map((feature) => (
-              <motion.div
-                key={feature.title}
-                className="feature-card"
-                variants={fadeInUp}
-                whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(99,102,241,0.55)' }}
-                transition={{ type: 'spring', stiffness: 350, damping: 22 }}
-              >
+              <Magnetic key={feature.title} block strength={0.18}>
                 <motion.div
-                  className="feature-icon"
-                  whileHover={{ rotate: 8, scale: 1.08 }}
-                  transition={{ type: 'spring', stiffness: 400 }}
+                  className="feature-card"
+                  variants={fadeInUp}
+                  whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(99,102,241,0.55)' }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 22 }}
                 >
-                  <feature.icon />
+                  <motion.div
+                    className="feature-icon"
+                    whileHover={{ rotate: 8, scale: 1.08 }}
+                    transition={{ type: 'spring', stiffness: 400 }}
+                  >
+                    <feature.icon aria-hidden="true" />
+                  </motion.div>
+                  <h4>{feature.title}</h4>
+                  <ul className="site-list feature-list">
+                    {feature.bullets.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </motion.div>
-                <h4>{feature.title}</h4>
-                <p>{feature.description}</p>
-              </motion.div>
+              </Magnetic>
             ))}
           </motion.div>
         </motion.div>

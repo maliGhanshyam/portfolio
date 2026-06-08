@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
-const Magnetic = ({ children, strength = 0.3, className = '' }) => {
+const Magnetic = ({ children, strength = 0.3, className = '', block = false }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 220, damping: 22 });
@@ -23,7 +23,12 @@ const Magnetic = ({ children, strength = 0.3, className = '' }) => {
   return (
     <motion.div
       className={className}
-      style={{ x: springX, y: springY, display: 'inline-block' }}
+      style={{
+        x: springX,
+        y: springY,
+        display: block ? 'block' : 'inline-block',
+        width: block ? '100%' : undefined,
+      }}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
     >
