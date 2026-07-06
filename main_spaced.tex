@@ -1,0 +1,206 @@
+\documentclass[a4paper,10pt]{article}
+
+% --- Packages (ATS-safe: standard fonts, no graphics/columns) ---
+\usepackage[margin=0.55in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% --- Pantone-inspired palette: Classic Blue + Living Coral ---
+% Primary   : Pantone 19-4052 Classic Blue     (headers, titles)
+% Accent    : Pantone 16-1546 Living Coral      (bullets, accent line)
+% Light bg  : Pantone 11-0601 Bright White tint (soft sky blue — header fill)
+% Soft rule : Pantone 14-4202 Glacier Gray     (divider lines)
+% Body      : Pantone 19-4005 Turbulence       (dark gray body text)
+\definecolor{primary}{RGB}{15,76,129}
+\definecolor{primarydark}{RGB}{0,58,112}
+\definecolor{accent}{RGB}{255,111,97}
+\definecolor{lightbg}{RGB}{240,246,252}
+\definecolor{softrule}{RGB}{195,210,225}
+\definecolor{bodytext}{RGB}{45,48,52}
+
+% --- Consistent spacing scale (comfortable two-page layout) ---
+\newcommand{\resumeskipsection}{\vspace{7pt}}
+\newcommand{\resumeskipentry}{\vspace{5pt}}
+\newcommand{\resumeskipafterheader}{\vspace{3pt}}
+
+% --- Consistent typography scale ---
+\newcommand{\resumename}{\fontsize{20pt}{24pt}\selectfont\bfseries\color{primary}}
+\newcommand{\resumecontact}{\fontsize{9.5pt}{12pt}\selectfont\color{bodytext}}
+\newcommand{\resumebody}{\fontsize{10pt}{13.5pt}\selectfont\color{bodytext}}
+\newcommand{\resumejobtitle}{\fontsize{10pt}{12pt}\selectfont\bfseries\color{primary}}
+\newcommand{\resumejobmeta}{\fontsize{10pt}{12pt}\selectfont\itshape\color{bodytext}}
+\newcommand{\resumedate}{\fontsize{10pt}{12pt}\selectfont\itshape\color{bodytext}}
+\newcommand{\resumeskilllabel}{\fontsize{10pt}{13.5pt}\selectfont\bfseries\color{primary}}
+
+% --- Keyword highlighting (ATS-safe: bold + color, no backgrounds) ---
+\newcommand{\kw}[1]{\textbf{\color{primary}#1}}
+\newcommand{\metric}[1]{\textbf{\color{accent}#1}}
+\newcommand{\demolink}[2]{\href{#1}{\textcolor{accent}{\textbf{#2}}}}
+
+% --- Hyperlinks ---
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primarydark,
+    urlcolor=primarydark,
+    pdfborder={0 0 0}
+}
+
+% --- Section header ---
+\newcommand{\sectionheader}[1]{%
+    \resumeskipsection
+    \noindent
+    \colorbox{primary}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep}{%
+            \vspace{2pt}%
+            {\resumesection #1}%
+            \vspace{2pt}%
+        }%
+    }%
+    \resumeskipafterheader
+}
+\newcommand{\resumesection}{\fontsize{11pt}{13pt}\selectfont\bfseries\color{white}}
+
+% --- Header block ---
+\newcommand{\headerbox}{%
+    \noindent
+    \colorbox{lightbg}{%
+        \parbox{\dimexpr\linewidth-2\fboxsep}{%
+            \vspace{6pt}%
+            \centering
+            {\resumename Ghanshyam Mali}\\[3pt]
+            {\fontsize{10.5pt}{13pt}\selectfont \kw{Full Stack Developer} \textbar\ \kw{NestJS} \textbar\ \kw{Next.js} \textbar\ \kw{MongoDB} \textbar\ \kw{TypeScript}}\\[4pt]
+            {\resumecontact
+                +91 8999764387 \textbar\
+                \href{mailto:ghanshyams.mali@gmail.com}{ghanshyams.mali@gmail.com} \textbar\
+                \href{https://github.com/maliGhanshyam}{GitHub} \textbar\
+                \href{https://linkedin.com/in/ghanshyammali}{LinkedIn} \textbar\
+                \demolink{https://gm-portfolio-rp85.onrender.com}{Portfolio}%
+            }%
+            \vspace{6pt}%
+        }%
+    }%
+    \vspace{2pt}%
+    \noindent{\color{accent}\rule{0.22\linewidth}{1.2pt}\color{softrule}\rule{0.78\linewidth}{0.6pt}}%
+}
+
+% --- Reusable entry helpers ---
+\newcommand{\jobentry}[4]{%
+    \noindent
+    {\resumejobtitle #1} \textbar\ {\resumejobmeta #2} \hfill {\resumedate #3}%
+    \begin{itemize}
+        #4
+    \end{itemize}%
+    \resumeskipentry
+}
+
+\newcommand{\projectentry}[4]{%
+    \noindent
+    {\resumejobtitle #1} \textbar\ {\resumejobmeta #2} \hfill {\resumedate #3}%
+    \begin{itemize}
+        #4
+    \end{itemize}%
+    \resumeskipentry
+}
+
+\newcommand{\educationentry}[4]{%
+    \noindent
+    {\resumejobtitle #1} \hfill {\resumedate #2}\\[1pt]
+    {\resumejobmeta #3} \hfill {\resumedate #4}%
+    \resumeskipentry
+}
+
+% --- List styling ---
+\setlist[itemize]{
+    left=0pt,
+    leftmargin=12pt,
+    label=\textcolor{accent}{\textbullet},
+    itemsep=2pt,
+    parsep=0pt,
+    topsep=2pt,
+    partopsep=0pt
+}
+
+% --- Page layout ---
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+\color{bodytext}
+
+\begin{document}
+\resumebody
+
+% ===== HEADER =====
+\headerbox
+
+% ===== PROFESSIONAL SUMMARY =====
+\sectionheader{PROFESSIONAL SUMMARY}
+\noindent Full-stack Developer with 3+ years of experience architecting scalable \kw{multi-tenant SaaS} platforms and enterprise web applications using \kw{React.js}, \kw{Next.js}, \kw{NestJS}, \kw{Node.js}, \kw{PostgreSQL}, and \kw{MongoDB}. Skilled in designing secure \kw{REST APIs} with \kw{JWT authentication}, \kw{RBAC}, and strict \kw{tenant isolation}, deployed on \kw{AWS (EC2/S3)}. Delivered measurable performance gains through \kw{MongoDB indexing}, \kw{API caching}, and \kw{query optimization}, while streamlining delivery with \kw{Docker}, \kw{CI/CD pipelines}, and automated testing frameworks.
+
+% ===== TECHNICAL SKILLS =====
+\sectionheader{TECHNICAL SKILLS}
+\noindent{\resumeskilllabel Frontend:} React.js, Next.js, Redux, Material UI, JavaScript, TypeScript, HTML, CSS\\[2pt]
+{\resumeskilllabel Backend:} Node.js, Express.js, Nest.js, REST APIs\\[2pt]
+{\resumeskilllabel Database:} PostgreSQL, MySQL, MongoDB\\[2pt]
+{\resumeskilllabel DevOps \& Tools:} AWS (EC2, S3), Jenkins CI/CD, Docker, Git, GitHub, Postman, VS Code, Cursor
+
+% ===== PROFESSIONAL EXPERIENCE =====
+\sectionheader{PROFESSIONAL EXPERIENCE}
+
+\jobentry{Full Stack Developer}{e-InnoSec Consulting LLC, Cedar Park, Texas}{Jan 2026 -- Present}{%
+    \item Led a cross-functional team of \metric{3 full-stack developers and 2 interns} as a hands-on contributor, driving sprint planning, code reviews, and feature delivery for a multi-tenant \kw{SaaS} platform
+    \item Designed and built a full \kw{RBAC (Role-Based Access Control)} system from scratch, along with \kw{JWT-based authentication}, \kw{tenant isolation}, and \kw{audit logging} --- securing \metric{10,000+ users} across \metric{10+ tenant organizations}
+    \item Architected a multi-tenant \kw{SaaS} platform using \kw{NestJS}, \kw{Next.js}, \kw{MongoDB}, and \kw{TypeScript}, scaling the application to support \metric{10,000+ users} across \metric{10+ tenant organizations}
+    \item Built an embeddable \kw{JavaScript SDK} (script-tag integration) enabling third-party client sites to capture and manage end-user data/consent in real time, with a self-service dashboard for users --- achieving \metric{95\%+ API test coverage}
+    \item Optimized \kw{REST APIs} through \kw{MongoDB indexing}, query tuning, and \kw{caching strategies}, reducing average response times by \metric{35--50\%}
+    \item Managed deployments across dev, demo, and production environments using \kw{AWS}, \kw{PM2}, and \kw{Docker}, building \kw{CI/CD pipelines} that improved release velocity and reliability
+}
+
+\jobentry{Associate Software Developer}{NeoSOFT Technology Pvt. Ltd., Mumbai}{July 2024 -- Jan 2026}{%
+    \item Built and deployed a full-stack payment aggregation platform using \kw{Stripe Connect (Custom accounts)}, \kw{React}, \kw{Next.js}, \kw{Node.js}, \kw{Express}, and \kw{PostgreSQL}, integrating \kw{REST APIs} and webhooks for real-time transaction and payout updates
+    \item Designed custom merchant onboarding flows and dashboards for \kw{Stripe Connect Custom accounts} across \metric{6+ regions} (US, UK, Japan, Germany, Sweden etc), handling region-specific compliance, identity verification, payouts, and fund transfers
+    \item Implemented \kw{Role-Based Access Control (RBAC)} and role-based dashboard login with a modular, optimized architecture --- reducing code duplication by \metric{20\%} and improving maintainability by \metric{15\%}
+    \item Developed reusable \kw{React components, hooks, and utilities}, eliminating \metric{30\%} duplicate code and speeding up feature delivery
+    \item Built complex onboarding/payout forms with \kw{React Hook Form}/\kw{Formik} and \kw{Yup}/\kw{Zod} validation, reducing form-related bugs by \metric{$\sim$45\%}
+    \item Optimized performance via \kw{lazy loading}, \kw{memoization}, and \kw{API caching} --- \metric{$\sim$40\% faster page loads}, \metric{$\sim$35\% lower API overhead}
+    \item Managed \kw{CI/CD pipelines} and deployments using \kw{AWS}, \kw{Jenkins}, and \kw{GitFlow}, cutting manual deployment time by \metric{$\sim$50\%}
+}
+
+% ===== PROJECTS (page 2) =====
+\newpage
+\sectionheader{PROJECTS}
+
+\projectentry{VentureLens}{\kw{Next.js 15}, \kw{TypeScript}, \kw{NestJS}, \kw{MongoDB}, \kw{Redis}}{\demolink{https://venturelens-dhqq.onrender.com}{Live Demo}}{%
+    \item Architected and shipped a production-grade B2B \kw{SaaS} where founders onboard tenants, submit startup ideas, and receive AI-generated validation reports (market analysis, SWOT, risk heatmap, 0--100 validation score, MVP roadmap, 90-day GTM plan) via \kw{REST APIs} and an async \kw{BullMQ} worker pipeline with \metric{3x} concurrency, exponential backoff retries, and \kw{Redis}-backed job orchestration
+    \item Engineered multi-tenant data isolation using request-scoped TenantContext, \kw{JWT authentication} (httpOnly cookies + optional Bearer gate), \kw{RBAC} (SUPER\_ADMIN / TENANT\_ADMIN / MANAGER / USER), CSRF double-submit protection, bcrypt password hashing, helmet/CORS, and global + per-route rate limiting --- with tenant-scoped Mongoose repositories and defense-in-depth query filtering ensuring zero cross-tenant data leakage
+    \item Built \kw{LLM} integration with \kw{OpenRouter} (deepseek/deepseek-chat): prompt engineering, JSON-mode completions, robust parsing, \kw{Zod} schema validation, 2-attempt retry logic, SHA-256 content-hash deduplication, 3-tier caching (Redis $\rightarrow$ MongoDB $\rightarrow$ generate), on-demand risk deep-dives, and cost controls (per-tenant daily AI quotas, chat IP limits, signed session cookies) --- cutting redundant API spend and abuse risk
+    \item Delivered a \kw{Next.js} dashboard (ideas pipeline, portfolio analytics, live polling UX), a public marketing site, and an anonymous AI chat copilot, deployed on \kw{Render} (Web Services + Key-Value Redis) with \kw{MongoDB Atlas}; hardened the platform with audit logging, global error sanitization, input validation, and CSRF-protected mutations across \metric{40+} frontend modules to ensure production-grade security and reliability
+}
+
+\projectentry{PokeDex Platform}{\kw{Next.js}, \kw{NestJS}, \kw{MongoDB}, \kw{TypeScript}, \kw{PostgreSQL}}{\demolink{https://pokedex-nextjs.onrender.com}{Live Demo}}{%
+    \item Built a full-stack Pok\'edex app with \kw{Next.js 14} (App Router) and a \kw{NestJS} \kw{REST API}, using \kw{MongoDB}/Mongoose and \kw{PostgreSQL} for data persistence, with \kw{TypeScript} across client and server for type-safe development
+    \item Implemented \kw{JWT authentication} with HttpOnly cookies, refresh tokens, and \kw{CORS} for secure cross-origin sessions; added a guest mode with per-feature usage limits and automatic data cleanup on logout
+    \item Developed interactive features including a battle simulator, Pok\'emon comparison, team analyzer, and favorites/profile with battle history, backed by \kw{Axios} API integration and server-side Pok\'eAPI sync with live pagination
+    \item Deployed frontend and backend as separate \kw{Render} web services with \kw{MongoDB Atlas}, environment-based configuration, and production build optimizations for \kw{CI/CD}-style deploys on a monorepo structure
+}
+
+% ===== EDUCATION =====
+\sectionheader{EDUCATION}
+
+\educationentry{Post Graduate Diploma in Advanced Computing (PG-DAC)}{March 2023 -- Sept 2023}{C-DAC, Mumbai}{Percentage: 68.25\%}
+
+\educationentry{Bachelor of Engineering}{June 2015 -- June 2018}{Savitribai Phule Pune University}{Percentage: 65.00\%}
+
+\educationentry{Diploma in Engineering}{Jan 2011 -- May 2015}{Shri. Bhagubhai Mafatlal Polytechnic (Autonomous)}{Percentage: 74.00\%}
+
+% ===== CERTIFICATIONS =====
+\sectionheader{CERTIFICATIONS}
+
+\educationentry{Scrum Fundamentals Certified (SFC)}{Dec 2024}{SCRUMstudy}{}
+
+\end{document}

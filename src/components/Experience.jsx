@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt, FaCertificate } from 'react-icons/fa';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
 import FloatingOrbs from './FloatingOrbs';
 import { staggerContainer, fadeInLeft, fadeInRight, viewport } from '../utils/animations';
@@ -13,10 +13,12 @@ const workExperiences = [
     location: 'Cedar Park, Texas',
     period: 'Jan 2026 - Present',
     description: [
-      'Developed and maintained multi-tenant SaaS applications using NestJS, Next.js, MongoDB, and TypeScript, supporting 10,000+ users across multiple tenant organizations',
-      'Designed and optimized REST APIs, reducing average response times by 35–50% through efficient MongoDB indexing, query optimization, and caching strategies',
-      'Implemented JWT authentication, RBAC, tenant isolation, and audit logging, ensuring secure access control across 100+ tenant environments',
-      'Built end-to-end features from database schema design to frontend dashboards, achieving 95%+ API test coverage and improving deployment reliability through Docker and CI/CD pipelines',
+      'Lead a team of 3 full-stack developers and 2 interns while staying hands-on — sprint planning, code reviews, and shipping features on a multi-tenant SaaS platform',
+      'Designed RBAC, JWT authentication, tenant isolation, and audit logging from the ground up, securing 10,000+ users across 10+ organizations',
+      'Architected the core platform with NestJS, Next.js, MongoDB, and TypeScript, scaling cleanly as new tenants onboard',
+      'Built an embeddable JavaScript SDK (script-tag integration) so client sites can capture consent and user data in real time, backed by a self-service dashboard',
+      'Cut average API response times by 35–50% through MongoDB indexing, query tuning, and caching strategies',
+      'Own deployments across dev, demo, and production on AWS with Docker, PM2, and CI/CD pipelines',
     ],
   },
   {
@@ -25,13 +27,13 @@ const workExperiences = [
     location: 'Mumbai, India',
     period: 'July 2024 - Jan 2026',
     description: [
-      'Built and deployed full-stack applications for payment aggregation platform, integrating Stripe payment APIs using React, Next.js, Node.js, Express, and PostgreSQL, supporting 10,000+ concurrent users',
-      'Implemented Role-Based Access Control (RBAC) and modular architecture, reducing code duplication by 20% and improving maintainability by 15%',
-      'Developed reusable React UI components, hooks, and utilities, eliminating 30% duplicate code and speeding up feature delivery',
-      'Built complex forms using React Hook Form / Formik with Yup/Zod validation, reducing form-related bugs by ~45%',
-      'Optimized performance using lazy loading, memoization, and API caching, achieving ~40% faster page loads and ~35% lower API overhead',
-      'Supported CI/CD pipelines and deployments using AWS, Jenkins, and GitFlow, reducing manual deployment time by ~50%',
-      'Worked in Agile/Scrum teams and contributed to unit testing with Jest and React Testing Library (up to ~75% coverage)',
+      'Shipped a full-stack payment aggregation platform with Stripe Connect Custom accounts, React, Next.js, Node.js, Express, and PostgreSQL',
+      'Designed merchant onboarding flows and dashboards across 6+ regions (US, UK, Japan, Germany, Sweden, and more) with region-specific compliance and payouts',
+      'Introduced RBAC and modular architecture — 20% less code duplication and 15% easier to maintain',
+      'Created reusable React components, hooks, and utilities that sped up feature work and removed 30% of duplicate UI code',
+      'Built complex onboarding and payout forms with React Hook Form/Formik and Yup/Zod validation, cutting form bugs by ~45%',
+      'Improved page loads ~40% and lowered API overhead ~35% with lazy loading, memoization, and API caching',
+      'Ran CI/CD and releases through AWS, Jenkins, and GitFlow — roughly half the manual deployment time',
     ],
   },
 ];
@@ -43,9 +45,8 @@ const educationItems = [
     location: 'Mumbai, India',
     period: 'March 2023 - Sept 2023',
     description: [
+      'Intensive full-stack and systems programming program',
       'Percentage: 68.25%',
-      'Specialized in Advanced Computing and Software Development',
-      'Completed comprehensive training in full-stack development',
     ],
   },
   {
@@ -54,8 +55,8 @@ const educationItems = [
     location: 'Pune, India',
     period: 'June 2015 - June 2018',
     description: [
+      'Engineering foundation with focus on software and systems',
       'Percentage: 65.00%',
-      'Focused on Computer Science and Engineering principles',
     ],
   },
   {
@@ -64,8 +65,21 @@ const educationItems = [
     location: 'Mumbai, India',
     period: 'Jan 2011 - May 2015',
     description: [
+      'Early engineering training in technology and applied sciences',
       'Percentage: 74.00%',
-      'Foundation in Engineering and Technology',
+    ],
+  },
+];
+
+const certificationItems = [
+  {
+    title: 'Scrum Fundamentals Certified (SFC)',
+    company: 'SCRUMstudy',
+    location: 'Online',
+    period: 'Dec 2024',
+    description: [
+      'Foundational certification in Scrum roles, events, and artifacts',
+      'Supports agile delivery practices used across client and product teams',
     ],
   },
 ];
@@ -192,6 +206,13 @@ const Experience = () => (
         items={educationItems}
         icon={FaGraduationCap}
         staggerDelay={0.15}
+      />
+
+      <TimelineSection
+        heading="Certifications"
+        items={certificationItems}
+        icon={FaCertificate}
+        staggerDelay={0.1}
       />
     </div>
   </section>

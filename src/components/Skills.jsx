@@ -8,7 +8,6 @@ import {
   FaCss3Alt,
   FaGitAlt,
   FaAws,
-  FaJava,
   FaCode,
 } from 'react-icons/fa';
 import {
@@ -23,7 +22,6 @@ import {
   SiMaterialdesign,
   SiJenkins,
   SiPostman,
-  SiSpring,
   SiDocker,
   SiGithub,
 } from 'react-icons/si';
@@ -51,8 +49,6 @@ const skillCategories = [
       { name: 'Express.js', icon: SiExpress, level: 90, color: '#ffffff' },
       { name: 'Nest.js', icon: SiNestjs, level: 90, color: '#E0234E' },
       { name: 'REST APIs', icon: FaNodeJs, level: 90, color: '#6366f1' },
-      { name: 'Java', icon: FaJava, level: 80, color: '#ED8B00' },
-      { name: 'Spring Boot', icon: SiSpring, level: 80, color: '#6DB33F' },
     ],
   },
   {
@@ -84,7 +80,7 @@ const Skills = () => (
       <AnimatedSectionHeader
         tag="Skills"
         title="Technologies I Work With"
-        description="Frontend, backend, database, and DevOps tools from my resume—built for production-grade SaaS applications."
+        description="The stack I reach for when building secure, scalable SaaS products — from UI polish to production deployments."
       />
 
       <div className="skills-grid">

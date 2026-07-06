@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaNodeJs, FaLock, FaKey, FaClock, FaPlug, FaGlobe } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaNodeJs, FaLock, FaKey, FaClock, FaPlug, FaGlobe, FaRobot, FaShieldAlt } from 'react-icons/fa';
 import {
   SiNextdotjs,
   SiTypescript,
   SiNestjs,
   SiPostgresql,
-  SiMaterialdesign,
+  SiMongodb,
+  SiRedis,
   SiRender,
   SiGithubactions,
+  SiZod,
 } from 'react-icons/si';
 import AnimatedSectionHeader from './AnimatedSectionHeader';
 import FloatingOrbs from './FloatingOrbs';
@@ -16,6 +18,22 @@ import { staggerContainer, fadeInUp, viewport } from '../utils/animations';
 import './Projects.css';
 
 const POKEDEX_IMAGE = `${import.meta.env.BASE_URL}image.png`;
+const VENTURELENS_IMAGE = `${import.meta.env.BASE_URL}venturelens.png`;
+
+const ProjectImage = ({ project }) => {
+  if (project.image) {
+    return <img src={project.image} alt={project.title} />;
+  }
+
+  return (
+    <div className="project-image-fallback" style={{ background: project.imageGradient }}>
+      <span className="project-image-fallback-title">{project.title}</span>
+      {project.imageSubtitle && (
+        <span className="project-image-fallback-subtitle">{project.imageSubtitle}</span>
+      )}
+    </div>
+  );
+};
 
 const TiltCard = ({ children, className }) => {
   const x = useMotionValue(0);
@@ -95,12 +113,61 @@ const Projects = () => {
 
   const projects = [
     {
+      title: 'VentureLens',
+      image: VENTURELENS_IMAGE,
+      imageSubtitle: 'AI-Powered Startup Validation SaaS',
+      imageGradient: 'linear-gradient(135deg, #0f4c81 0%, #312e81 45%, #7c2d12 100%)',
+      highlights: [
+        'Production B2B SaaS where founders onboard tenants, submit ideas, and receive AI-generated validation reports — market analysis, SWOT, risk heatmaps, scores, MVP roadmaps, and 90-day GTM plans.',
+        'Multi-tenant backend with request-scoped isolation, JWT auth (httpOnly cookies), four-tier RBAC, CSRF protection, rate limiting, and tenant-scoped repositories that prevent cross-tenant data leaks.',
+        'Async BullMQ + Redis worker pipeline orchestrates LLM jobs via OpenRouter with Zod-validated JSON output, 3-tier caching, deduplication, and per-tenant AI quotas to control cost and abuse.',
+        'Shipped a Next.js dashboard, public marketing site, and anonymous AI chat copilot — deployed on Render with MongoDB Atlas and hardened across 40+ frontend modules.',
+      ],
+      techStack: [
+        {
+          category: 'Frontend',
+          items: [
+            { name: 'Next.js 15', icon: SiNextdotjs, color: '#ffffff' },
+            { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+          ],
+        },
+        {
+          category: 'Backend',
+          items: [
+            { name: 'NestJS', icon: SiNestjs, color: '#E0234E' },
+            { name: 'BullMQ', icon: FaClock, color: '#f59e0b' },
+            { name: 'REST API', icon: FaPlug, color: '#6366f1' },
+            { name: 'OpenRouter', icon: FaRobot, color: '#22c55e' },
+          ],
+        },
+        {
+          category: 'Data & Security',
+          items: [
+            { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+            { name: 'Redis', icon: SiRedis, color: '#DC382D' },
+            { name: 'JWT Auth', icon: FaLock, color: '#f59e0b' },
+            { name: 'RBAC', icon: FaShieldAlt, color: '#a78bfa' },
+            { name: 'Zod', icon: SiZod, color: '#3B82F6' },
+          ],
+        },
+        {
+          category: 'DevOps',
+          items: [
+            { name: 'Render', icon: SiRender, color: '#46E3B7' },
+            { name: 'CI/CD', icon: SiGithubactions, color: '#2088FF' },
+          ],
+        },
+      ],
+      live: 'https://venturelens-dhqq.onrender.com',
+      featured: true,
+    },
+    {
       title: 'PokeDex Platform',
       highlights: [
-        'Built full-stack Pokédex application with Next.js frontend and NestJS backend, implementing JWT authentication with refresh token rotation for secure user sessions across 500+ registered users.',
-        'Integrated third-party Pokémon API using Node.js cron jobs for automated data synchronization, achieving 99.9% data consistency and eliminating manual updates for 1,000+ Pokémon records.',
-        'Developed responsive UI with debounced search functionality and Material UI components, improving search performance by 30% and reducing redundant component code by 40%.',
-        'Deployed production-ready application on Render with automated CI/CD pipeline, PostgreSQL persistence, and environment-based configuration management.',
+        'Full-stack Pokédex built with Next.js 14 (App Router) and a NestJS REST API — MongoDB and PostgreSQL on the backend, TypeScript end to end.',
+        'Secure sessions with JWT auth, HttpOnly cookies, refresh tokens, and CORS — plus a guest mode with per-feature limits and automatic cleanup on logout.',
+        'Interactive battle simulator, Pokémon comparison, team analyzer, favorites, and battle history — synced with PokéAPI and live pagination.',
+        'Deployed frontend and backend as separate Render services in a monorepo with MongoDB Atlas and environment-based production builds.',
       ],
       image: POKEDEX_IMAGE,
       techStack: [
@@ -109,7 +176,6 @@ const Projects = () => {
           items: [
             { name: 'Next.js', icon: SiNextdotjs, color: '#ffffff' },
             { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
-            { name: 'Material UI', icon: SiMaterialdesign, color: '#007FFF' },
           ],
         },
         {
@@ -118,12 +184,12 @@ const Projects = () => {
             { name: 'NestJS', icon: SiNestjs, color: '#E0234E' },
             { name: 'Node.js', icon: FaNodeJs, color: '#339933' },
             { name: 'REST API', icon: FaPlug, color: '#6366f1' },
-            { name: 'Cron Jobs', icon: FaClock, color: '#22c55e' },
           ],
         },
         {
           category: 'Database & Auth',
           items: [
+            { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
             { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
             { name: 'JWT Auth', icon: FaLock, color: '#f59e0b' },
             { name: 'Refresh Tokens', icon: FaKey, color: '#a78bfa' },
@@ -134,12 +200,10 @@ const Projects = () => {
           items: [
             { name: 'Render', icon: SiRender, color: '#46E3B7' },
             { name: 'CI/CD', icon: SiGithubactions, color: '#2088FF' },
-            { name: 'Env Config', icon: SiGithubactions, color: '#8b5cf6' },
           ],
         },
       ],
-      github: 'https://github.com/maliGhanshyam',
-      live: 'https://pokedex-nextjs.onrender.com/',
+      live: 'https://pokedex-nextjs.onrender.com',
       featured: true,
     },
   ];
@@ -151,7 +215,7 @@ const Projects = () => {
         <AnimatedSectionHeader
           tag="Portfolio"
           title="Featured Projects"
-          description="A collection of projects showcasing my skills and expertise in web development"
+          description="Selected builds that show how I approach SaaS architecture, AI integrations, and production-ready full-stack delivery"
         />
 
         <motion.div
@@ -172,7 +236,7 @@ const Projects = () => {
                 onHoverEnd={() => setHoveredIndex(null)}
               >
                 <div className="project-image">
-                  <img src={project.image} alt={project.title} />
+                  <ProjectImage project={project} />
                 </div>
                 <motion.div
                   className="project-content"

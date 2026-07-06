@@ -9,13 +9,13 @@ import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, viewport } from '.
 import './About.css';
 
 const summaryBullets = [
-  'Full Stack Developer with 3+ years building scalable multi-tenant SaaS and enterprise web applications.',
-  'Proficient in React.js, Next.js, NestJS, Node.js, PostgreSQL, and MongoDB.',
-  'Expertise in REST APIs, JWT authentication, RBAC, tenant isolation, and AWS (EC2/S3) deployments.',
-  'Performance optimization through MongoDB indexing, API caching, and query optimization.',
-  'Docker, CI/CD pipelines, and automated testing for production-ready delivery.',
-  'Currently at e-InnoSec Consulting LLC — developing SaaS platforms supporting 10,000+ users.',
-  'Previously at NeoSOFT Technology — payment aggregation, Stripe integration, and reusable React libraries (20% less duplication, ~50% faster deployments).',
+  'I design and build full-stack products end to end — APIs, databases, and the interfaces people actually use.',
+  '3+ years specializing in multi-tenant SaaS and enterprise apps with React, Next.js, NestJS, and TypeScript.',
+  'Security-first mindset: JWT authentication, RBAC, tenant isolation, and audit logging baked in from day one.',
+  'I care about measurable impact — faster APIs, leaner codebases, and deployments that do not keep the team up at night.',
+  'Currently leading feature delivery at e-InnoSec Consulting LLC on a platform serving 10,000+ users across 10+ tenants.',
+  'Previously at NeoSOFT Technology, shipping Stripe Connect payment flows across 6+ regions and reusable React tooling.',
+  'Side projects like VentureLens and PokeDex let me experiment with AI pipelines, async workers, and production-grade auth.',
 ];
 
 const features = [
@@ -23,35 +23,35 @@ const features = [
     icon: FaCloud,
     title: 'Multi-Tenant SaaS',
     bullets: [
-      'NestJS + Next.js + MongoDB with tenant isolation and audit logging',
-      'RBAC across 100+ tenant environments',
-      'Platforms supporting 10,000+ users',
+      'NestJS + Next.js + MongoDB stacks with strict tenant isolation',
+      'RBAC, JWT auth, and audit logging across 10+ organizations',
+      'Embeddable JS SDK for third-party integrations',
     ],
   },
   {
     icon: FaRocket,
     title: 'Performance & Optimization',
     bullets: [
-      'MongoDB indexing, API caching, and query optimization',
-      'Lazy loading and memoization for faster UI',
-      '35–50% faster API responses and ~40% faster page loads',
+      'MongoDB indexing, Redis caching, and tuned query patterns',
+      'Lazy loading and memoization on the frontend',
+      '35–50% faster API responses in production workloads',
     ],
   },
   {
     icon: FaShieldAlt,
     title: 'Security & DevOps',
     bullets: [
-      'JWT authentication with refresh tokens and RBAC',
-      'Docker containerization and Jenkins CI/CD',
-      'AWS (EC2/S3) deployments with 95%+ API test coverage',
+      'CSRF protection, rate limiting, and defense-in-depth filtering',
+      'Docker, PM2, and Jenkins CI/CD on AWS (EC2/S3)',
+      '95%+ API test coverage on critical platform features',
     ],
   },
 ];
 
 const stats = [
-  { value: 3, suffix: '+', label: 'Years Experience', decimals: 0 },
+  { value: 2, suffix: '+', label: 'Years Experience', decimals: 0 },
   { value: 10, suffix: 'K+', label: 'Users Supported' },
-  { value: 95, suffix: '%+', label: 'API Test Coverage' },
+  { value: 10, suffix: '+', label: 'Tenant Organizations' },
 ];
 
 const listStagger = {

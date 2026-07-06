@@ -139,6 +139,8 @@ const HeroVisual = ({ parallax }) => {
   );
 };
 
+const RESUME_URL = `${import.meta.env.BASE_URL}ghanshyam_resume.pdf`;
+
 const Hero = () => {
   const name = 'Ghanshyam Mali';
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -223,10 +225,10 @@ const Hero = () => {
               spinOpacity={0.45}
             >
               <ul className="site-list hero-summary">
-                <li>Full-stack Developer with 3+ years of experience building scalable multi-tenant SaaS and enterprise applications</li>
-                <li>Proficient in React.js, Next.js, NestJS, Node.js, PostgreSQL, and MongoDB</li>
-                <li>Expertise in REST APIs, JWT authentication, RBAC, tenant isolation, and AWS (EC2/S3)</li>
-                <li>Docker, CI/CD pipelines, and automated testing for production-ready delivery</li>
+                <li>I architect and ship multi-tenant SaaS platforms — from secure APIs to polished dashboards</li>
+                <li>3+ years building with React, Next.js, NestJS, Node.js, PostgreSQL, and MongoDB</li>
+                <li>Focused on JWT auth, RBAC, tenant isolation, and performance at scale on AWS</li>
+                <li>Docker, CI/CD, and automated testing to keep releases fast and reliable</li>
               </ul>
 
               <div className="hero-buttons">
@@ -251,7 +253,10 @@ const Hero = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                   <motion.a
-                    href="#contact"
+                    href={RESUME_URL}
+                    download="Ghanshyam_Mali_Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="btn btn-secondary btn-in-gradient"
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.98 }}
